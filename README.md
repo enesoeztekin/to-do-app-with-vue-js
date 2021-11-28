@@ -4,6 +4,10 @@
 
 ![alt text](https://kriptodedektifi.net/overview-of-to-doo-app.PNG)
 
+## User Interface Using
+```
+Double-click onto each task to toggle its reminder.
+```
 
 ## Project setup
 
@@ -28,7 +32,6 @@ npm run build
 ```
 npm install -g json-server
 json-server --watch db.json
-
 ```
 
 ### Lints and fixes files
