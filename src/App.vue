@@ -32,55 +32,59 @@ export default {
     };
   },
   methods: {
-    addTask(task) {
-      this.tasks = [...this.tasks, task];
+    async addTask(task) {
+      const res = await fetch("http://localhost:3000/tasks", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(task),
+      });
+      const data = res.json();
+      this.tasks = [...this.tasks, data];
     },
-    deleteTask(id) {
-      this.tasks = this.tasks.filter((task) => task.id != id);
+    async deleteTask(id) {
+      const res = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: "DELETE",
+      });
+
+      res.status === 200
+        ? (this.tasks = this.tasks.filter((task) => task.id != id))
+        : alert("Error while deleting the task!");
     },
-    toggleReminder(id) {
+    async toggleReminder(id) {
+      const taskToToggle = await this.fetchTask(id);
+      const updReminder = { ...taskToToggle, reminder: !taskToToggle.reminder };
+
+      const res = await fetch(`http://localhost:3000/tasks/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(updReminder),
+      });
+
+      const data = res.json();
+
       var index = this.tasks.findIndex((task) => task.id == id);
-      this.tasks[index].reminder
-        ? (this.tasks[index].reminder = false)
-        : (this.tasks[index].reminder = true);
+      this.tasks[index].reminder ? (this.tasks[index].reminder = data.reminder) : (this.tasks[index].reminder = !data.reminder);
     },
     AddTaskDisplay() {
       this.display ? (this.display = false) : (this.display = true);
     },
+    async fetchTasks() {
+      const res = await fetch("http://localhost:3000/tasks");
+      const data = res.json();
+      return data;
+    },
+    async fetchTask(id) {
+      const res = await fetch(`http://localhost:3000/tasks/${id}`);
+      const data = res.json();
+      return data;
+    },
   },
-  created() {
-    this.tasks = [
-      {
-        id: 1,
-        text: "Do your laundry!",
-        time: "11th Nov 2021 at 3:14 PM",
-        reminder: true,
-      },
-      {
-        id: 2,
-        text: "Practice in English.",
-        time: "11th Nov 2021 at 3:14 PM",
-        reminder: true,
-      },
-      {
-        id: 3,
-        text: "Sleep before midnight!",
-        time: "11th Nov 2021 at 3:14 PM",
-        reminder: false,
-      },
-      {
-        id: 4,
-        text: "Go to work!",
-        time: "11th Nov 2021 at 3:14 PM",
-        reminder: false,
-      },
-      {
-        id: 5,
-        text: "Practice with the guitar.",
-        time: "11th Nov 2021 at 3:14 PM",
-        reminder: false,
-      },
-    ];
+  async created() {
+    this.tasks = await this.fetchTasks();
   },
 };
 </script>
