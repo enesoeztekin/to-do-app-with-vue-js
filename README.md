@@ -6,7 +6,9 @@
 
 ## User Interface Using
 ```
-Double-click onto each task to toggle its reminder.
+1) Double-click onto each task to toggle its reminder.
+2) Add task button, which is green, is to toggle the display of AddTask Component which has input fields such as Task title, date of task and set reminder.
+3) You can use the X icon on each task to delete spesific task. 
 ```
 
 ## Project setup
