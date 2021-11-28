@@ -1,5 +1,10 @@
 # to-doo
 
+<strong>Overview of the project:</strong>
+
+![alt text](https://kriptodedektifi.net/overview-of-to-doo-app.PNG)
+
+
 ## Project setup
 
 ```
