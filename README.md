@@ -1,8 +1,8 @@
 # to-doo
 
-<strong>Overview of the project:</strong>
+<strong>Preview:</strong>
 
-![alt text](https://kriptodedektifi.net/overview-of-to-doo-app.PNG)
+![alt text](https://kriptodedektifi.net/preview-of-to-doo-app.PNG)
 
 ## User Interface Using
 ```
